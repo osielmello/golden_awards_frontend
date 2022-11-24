@@ -1,0 +1,102 @@
+<div class="flex w-full">
+  <div class="border rounded-lg h-full w-full">
+    <div class="pl-4 pt-6">
+      <h2 class="mb-4 text-xl font-bold text-gray-700">List years with multiple winners</h2>
+    </div>
+
+    <section class="mx-auto font-mono px-4">
+      <div class="w-full mb-8 overflow-hidden rounded-lg shadow-lg">
+        <div class="w-full overflow-x-auto">
+          <table class="w-full">
+            <thead>
+            <tr
+              class="text-md font-semibold tracking-wide text-left text-gray-900 bg-gray-100 uppercase border-b border-gray-600">
+              <th class="px-4 py-3">Id</th>
+              <th class="px-4 py-3">
+                <span>Year</span>
+                <div class="flex h-8 w-full items-center rounded border shadow-sm">
+                <input #yearInput
+                  class="h-full w-full flex-1 rounded border-none py-0 text-14 placeholder-silver-500 focus:outline-none focus:ring-0 px-3"
+                  placeholder="Search by year" type="number">
+                </div>
+              </th>
+              <th class="px-4 py-3">Title</th>
+              <th class="px-4 py-3">
+                <span>Winner ?</span>
+                <div class="flex h-8 w-full items-center rounded border shadow-sm">
+                  <label for="winner"></label>
+                  <select #winnerSelect
+                          id="winner"
+                         class="h-full w-full flex-1 rounded border-none py-0 text-14 placeholder-silver-500 focus:outline-none focus:ring-0 px-3">
+                    <option value="YES_NO">Yes/No</option>
+                    <option value="YES">Yes</option>
+                    <option value="NO">No</option>
+                  </select>
+                </div>
+              </th>
+            </tr>
+            </thead>
+            <tbody class="bg-white">
+            <ng-container *ngFor="let movie of (movies$ | async)">
+              <tr class="text-gray-700">
+                <td class="px-4 py-3 text-ms border">{{movie.id}}</td>
+                <td class="px-4 py-3 text-ms border">{{movie.year}}</td>
+                <td class="px-4 py-3 text-ms border">{{movie.title}}</td>
+                <td class="px-4 py-3 text-ms border">{{movie.winner ? 'Yes' : 'No'}}</td>
+              </tr>
+            </ng-container>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+    <div class="sm:flex-1 sm:flex sm:items-center sm:justify-between mt-4 m-4">
+      <div>
+        <p class="text-sm leading-5">
+          Showing
+          <span class="font-medium">{{(data$ | async)?.size}}</span>
+          of
+          <span class="font-medium">{{(data$ | async)?.totalElements}}</span>
+          movies
+        </p>
+      </div>
+      <div>
+        <nav class="relative z-0 inline-flex shadow-sm">
+          <div>
+            <a (click)="decrementPage()"
+               aria-label="Previous"
+               class="relative decrement">
+              <svg class="h-5 w-5" fill="currentColor" viewBox="0 0 20 20">
+                <path clip-rule="evenodd"
+                      d="M12.707 5.293a1 1 0 010 1.414L9.414 10l3.293 3.293a1 1 0 01-1.414 1.414l-4-4a1 1 0 010-1.414l4-4a1 1 0 011.414 0z"
+                      fill-rule="evenodd"></path>
+              </svg>
+            </a>
+          </div>
+          <div>
+            <ng-container *ngFor="let page of showPages$ | async">
+              <a (click)="setPage(page)"
+                 [ngClass]="(actualPage$ | async)! === page ? ['bg-gray-400', 'text-gray-700'] : []"
+                 class="relative -ml-px inline-flex items-center px-4 py-2 border border-gray-300 bg-white text-sm leading-5 font-medium focus:z-10 focus:outline-none focus:border-blue-300 transition ease-in-out duration-150 cursor-pointer select-none min-w-[3rem]">
+                {{page}}
+              </a>
+            </ng-container>
+          </div>
+          <div>
+            <a (click)="incrementPage()"
+               aria-label="Next"
+               class="relative increment">
+              <svg class="h-5 w-5" fill="currentColor" viewBox="0 0 20 20">
+                <path clip-rule="evenodd"
+                      d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z"
+                      fill-rule="evenodd"></path>
+              </svg>
+            </a>
+          </div>
+        </nav>
+      </div>
+    </div>
+
+  </div>
+</div>

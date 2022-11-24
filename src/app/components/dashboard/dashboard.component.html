@@ -1,0 +1,198 @@
+<div class="flex w-full space-y-5">
+  <div class="flex flex-col h-full w-full space-y-5">
+    <div class="flex h-full w-full flex-row space-x-5">
+
+      <div class="border rounded-lg max-h-[20rem] w-full">
+        <div class="pl-4 pt-6">
+          <h2 class="mb-4 text-xl font-bold text-gray-700">List years with multiple winners</h2>
+        </div>
+
+        <section class="container mx-auto font-mono px-4">
+          <div class="w-full mb-8 overflow-hidden rounded-lg shadow-lg">
+            <div class="w-full overflow-x-auto">
+              <table class="w-full">
+                <thead>
+                <tr
+                  class="text-md font-semibold tracking-wide text-left text-gray-900 bg-gray-100 uppercase border-b border-gray-600">
+                  <th class="px-4 py-3">Name</th>
+                  <th class="px-4 py-3">Win count</th>
+                </tr>
+                </thead>
+                <tbody class="bg-white">
+
+                <ng-container *ngFor="let yearWinner of (yearsWithMultipleWinners$ | async)?.years">
+                  <tr class="text-gray-700">
+                    <td class="px-4 py-3 text-ms border">{{yearWinner.year}}</td>
+                    <td class="px-4 py-3 text-ms border">{{yearWinner.winnerCount}}</td>
+                  </tr>
+                </ng-container>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </section>
+      </div>
+
+      <div class="border rounded-lg max-h-[20rem] w-full">
+        <div class="pl-4 pt-6">
+          <h2 class="mb-4 text-xl font-bold text-gray-700">Top 3 studios with winners</h2>
+        </div>
+
+        <section class="container mx-auto font-mono px-4">
+          <div class="w-full mb-8 overflow-hidden rounded-lg shadow-lg">
+            <div class="w-full overflow-x-auto">
+              <table class="w-full">
+                <thead>
+                <tr
+                  class="text-md font-semibold tracking-wide text-left text-gray-900 bg-gray-100 uppercase border-b border-gray-600">
+                  <th class="px-4 py-3">Name</th>
+                  <th class="px-4 py-3">Win count</th>
+                </tr>
+                </thead>
+                <tbody class="bg-white">
+                <ng-container *ngFor="let studio of (studiosWithWinCount$ | async)?.studios">
+                  <tr class="text-gray-700">
+                    <td class="px-4 py-3 text-ms border">{{studio.name}}</td>
+                    <td class="px-4 py-3 text-ms border">{{studio.winCount}}</td>
+                  </tr>
+                </ng-container>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </section>
+      </div>
+
+    </div>
+
+    <div class="flex h-full w-full flex-row space-x-5">
+
+      <div class="border rounded-lg min-h-[30rem] w-full">
+        <div class="pl-4 pt-6">
+          <h2 class="mb-4 text-lg font-bold text-gray-700">Producers with longest and shortest interval between
+            wins</h2>
+          <h3 class="mb-4 text-lg text-gray-700">Maximum</h3>
+        </div>
+
+        <section class="container mx-auto font-mono px-4">
+          <div class="w-full mb-8 overflow-hidden rounded-lg shadow-lg">
+            <div class="w-full overflow-x-auto">
+              <table class="w-full">
+                <thead>
+                <tr
+                  class="text-md font-semibold tracking-wide text-left text-gray-900 bg-gray-100 uppercase border-b border-gray-600">
+                  <th class="px-4 py-3">Producer</th>
+                  <th class="px-4 py-3">Interval</th>
+                  <th class="px-4 py-3">Previous year</th>
+                  <th class="px-4 py-3">Following year</th>
+                </tr>
+                </thead>
+                <tbody class="bg-white">
+                <ng-container *ngFor="let maxWinner of (maxWinIntervalForProducers$ | async)">
+                  <tr class="text-gray-700">
+                    <td class="px-4 py-3 text-ms border">{{maxWinner.producer}}</td>
+                    <td class="px-4 py-3 text-ms border">{{maxWinner.interval}}</td>
+                    <td class="px-4 py-3 text-ms border">{{maxWinner.previousWin}}</td>
+                    <td class="px-4 py-3 text-ms border">{{maxWinner.followingWin}}</td>
+                  </tr>
+                </ng-container>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </section>
+
+        <div class="pl-4">
+          <h3 class="mb-4 text-lg text-gray-700">Minimum</h3>
+        </div>
+
+        <section class="container mx-auto font-mono px-4">
+          <div class="w-full mb-8 overflow-hidden rounded-lg shadow-lg">
+            <div class="w-full overflow-x-auto">
+              <table class="w-full">
+                <thead>
+                <tr
+                  class="text-md font-semibold tracking-wide text-left text-gray-900 bg-gray-100 uppercase border-b border-gray-600">
+                  <th class="px-4 py-3">Producer</th>
+                  <th class="px-4 py-3">Interval</th>
+                  <th class="px-4 py-3">Previous year</th>
+                  <th class="px-4 py-3">Following year</th>
+                </tr>
+                </thead>
+                <tbody class="bg-white">
+                <ng-container *ngFor="let minWinner of (minWinIntervalForProducers$ | async)">
+                  <tr class="text-gray-700">
+                    <td class="px-4 py-3 text-ms border">{{minWinner.producer}}</td>
+                    <td class="px-4 py-3 text-ms border">{{minWinner.interval}}</td>
+                    <td class="px-4 py-3 text-ms border">{{minWinner.previousWin}}</td>
+                    <td class="px-4 py-3 text-ms border">{{minWinner.followingWin}}</td>
+                  </tr>
+                </ng-container>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </section>
+      </div>
+
+      <div class="border rounded-lg min-h-[30rem] w-full">
+        <div class="pl-4 pt-6">
+          <h2 class="mb-4 text-xl font-bold text-gray-700">List movie winners by year</h2>
+        </div>
+
+        <div class="px-6 mb-4 flex w-full flex-row space-x-5">
+          <div class="flex h-10 w-full items-center rounded border shadow-sm">
+            <ng-container [formGroup]="searchForm">
+              <input
+                [formControlName]="'year'"
+                [id]="'year'"
+                class="h-full w-full flex-1 rounded border-none py-0 text-14 placeholder-silver-500 focus:outline-none focus:ring-0 px-3"
+                placeholder="Search by year" type="number">
+            </ng-container>
+          </div>
+
+          <div
+            (click)="onSearch()"
+            class="h-7 w-7 border-gray-300 bg-white text-gray-700 hover:bg-gray-100 focus:border-gray-500 focus:ring-gray/25">
+            <svg
+              [attr.viewBox]="'0 0 24 24'"
+              class="render-svg h-full w-full fill-current"
+              stroke="none"
+              xmlns="http://www.w3.org/2000/svg">
+              <path
+                [attr.d]="'m10.8 0c-5.95 0-10.8 4.85-10.8 10.8 0 5.95 4.85 10.8 10.8 10.8 2.54 0 4.77-1.01 6.62-2.48l4.53 4.53a1.2 1.2 0 0 0 1.7 0 1.2 1.2 0 0 0 0-1.7l-4.53-4.53c1.47-1.85 2.48-4.08 2.48-6.62 0-5.95-4.85-10.8-10.8-10.8zm0 2.4c4.65 0 8.4 3.75 8.4 8.4 0 2.32-0.933 4.4-2.44 5.92a1.2 1.2 0 0 0-0.0273 0.0117 1.2 1.2 0 0 0-0.0117 0.0273c-1.52 1.51-3.6 2.44-5.92 2.44-4.65 0-8.4-3.75-8.4-8.4 0-4.65 3.75-8.4 8.4-8.4z'"/>
+            </svg>
+          </div>
+        </div>
+
+        <section class="container mx-auto font-mono px-4">
+          <div class="w-full mb-8 overflow-hidden rounded-lg shadow-lg">
+            <div class="w-full overflow-x-auto">
+              <table class="w-full">
+                <thead>
+                <tr
+                  class="text-md font-semibold tracking-wide text-left text-gray-900 bg-gray-100 uppercase border-b border-gray-600">
+                  <th class="px-4 py-3">Id</th>
+                  <th class="px-4 py-3">Year</th>
+                  <th class="px-4 py-3">Title</th>
+                </tr>
+                </thead>
+                <tbody class="bg-white">
+                <ng-container *ngFor="let movie of (moviesByYear$ | async)">
+                  <tr class="text-gray-700">
+                    <td class="px-4 py-3 text-ms border">{{movie.id}}</td>
+                    <td class="px-4 py-3 text-ms border">{{movie.year}}</td>
+                    <td class="px-4 py-3 text-ms border">{{movie.title}}</td>
+                  </tr>
+                </ng-container>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </section>
+      </div>
+
+    </div>
+  </div>
+
+</div>
