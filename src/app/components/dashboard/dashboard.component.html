@@ -21,7 +21,7 @@
                 <tbody class="bg-white">
 
                 <ng-container *ngFor="let yearWinner of (yearsWithMultipleWinners$ | async)?.years">
-                  <tr class="text-gray-700">
+                  <tr class="text-gray-700" id="years-multiple-winners">
                     <td class="px-4 py-3 text-ms border">{{yearWinner.year}}</td>
                     <td class="px-4 py-3 text-ms border">{{yearWinner.winnerCount}}</td>
                   </tr>
@@ -51,7 +51,7 @@
                 </thead>
                 <tbody class="bg-white">
                 <ng-container *ngFor="let studio of (studiosWithWinCount$ | async)?.studios">
-                  <tr class="text-gray-700">
+                  <tr class="text-gray-700" id="studios-with-count">
                     <td class="px-4 py-3 text-ms border">{{studio.name}}</td>
                     <td class="px-4 py-3 text-ms border">{{studio.winCount}}</td>
                   </tr>
@@ -89,7 +89,7 @@
                 </thead>
                 <tbody class="bg-white">
                 <ng-container *ngFor="let maxWinner of (maxWinIntervalForProducers$ | async)">
-                  <tr class="text-gray-700">
+                  <tr class="text-gray-700" id="max-win-interval-producers">
                     <td class="px-4 py-3 text-ms border">{{maxWinner.producer}}</td>
                     <td class="px-4 py-3 text-ms border">{{maxWinner.interval}}</td>
                     <td class="px-4 py-3 text-ms border">{{maxWinner.previousWin}}</td>
@@ -121,7 +121,7 @@
                 </thead>
                 <tbody class="bg-white">
                 <ng-container *ngFor="let minWinner of (minWinIntervalForProducers$ | async)">
-                  <tr class="text-gray-700">
+                  <tr class="text-gray-700" id="min-win-interval-producers">
                     <td class="px-4 py-3 text-ms border">{{minWinner.producer}}</td>
                     <td class="px-4 py-3 text-ms border">{{minWinner.interval}}</td>
                     <td class="px-4 py-3 text-ms border">{{minWinner.previousWin}}</td>
@@ -143,7 +143,7 @@
         <div class="px-6 mb-4 flex w-full flex-row space-x-5">
           <div class="flex h-10 w-full items-center rounded border shadow-sm">
             <ng-container [formGroup]="searchForm">
-              <input
+              <input data-testid="input-year"
                 [formControlName]="'year'"
                 [id]="'year'"
                 class="h-full w-full flex-1 rounded border-none py-0 text-14 placeholder-silver-500 focus:outline-none focus:ring-0 px-3"
@@ -151,7 +151,7 @@
             </ng-container>
           </div>
 
-          <div
+          <div data-testid="on-search"
             (click)="onSearch()"
             class="h-7 w-7 border-gray-300 bg-white text-gray-700 hover:bg-gray-100 focus:border-gray-500 focus:ring-gray/25">
             <svg
@@ -179,7 +179,7 @@
                 </thead>
                 <tbody class="bg-white">
                 <ng-container *ngFor="let movie of (moviesByYear$ | async)">
-                  <tr class="text-gray-700">
+                  <tr class="text-gray-700" id="movies-by-year">
                     <td class="px-4 py-3 text-ms border">{{movie.id}}</td>
                     <td class="px-4 py-3 text-ms border">{{movie.year}}</td>
                     <td class="px-4 py-3 text-ms border">{{movie.title}}</td>

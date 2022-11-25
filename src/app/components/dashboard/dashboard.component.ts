@@ -33,8 +33,9 @@ export class DashboardComponent implements OnInit, OnDestroy {
   minWinIntervalForProducers$: Observable<ProducerInterval[]>;
   moviesByYear$: BehaviorSubject<Movie[]>
 
+  evtSearch: EventEmitter<number>;
+
   private readonly winIntervalForProducers$: BehaviorSubject<MaxMinWinIntervalForProducers>;
-  private readonly evtSearch: EventEmitter<number>;
   private readonly subscription: Subscription;
 
   constructor(private movieService: MovieService, private formBuilder: FormBuilder) {
