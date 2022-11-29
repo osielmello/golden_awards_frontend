@@ -7,7 +7,7 @@ import {
   distinctUntilChanged,
   filter,
   fromEvent,
-  map,
+  map, merge,
   Observable,
   skip,
   Subscription,
@@ -158,7 +158,7 @@ export class ListComponent implements OnInit, OnDestroy {
       .subscribe((page: number) => {
         this.loading = true;
         const filter: FilterMovie = this.filter$.value;
-        this.filter$.next({...filter, page: page - 1});
+        this.filter$.next({...filter, page: page > 0 ? page - 1 : 0});
       });
   }
 
@@ -168,7 +168,10 @@ export class ListComponent implements OnInit, OnDestroy {
    */
   private addChangedYear(): void {
     this.subscription
-      .add(fromEvent(this.yearIp.nativeElement, "keyup")
+      .add(merge(
+        fromEvent(this.yearIp.nativeElement, "keyup"),
+        fromEvent(this.yearIp.nativeElement, "change"),
+      )
         .pipe(
           map((e: any) => e.target.value),
           filter((value) => !value || value.toString().length === 4),
